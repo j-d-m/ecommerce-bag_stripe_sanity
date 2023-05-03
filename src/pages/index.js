@@ -7,7 +7,7 @@ import { Product, HeroBanner, Footer } from "../../components";
 function Home({ products, bannerData }) {
   return (
     <div>
-      {/* bannerData is an array with on object and will will always be passing the first element of that array */}
+      {/* bannerData is an array with on object and we will always be passing the first element of that array */}
       <HeroBanner heroBanner={bannerData.length && bannerData[0]} />
       {console.log(bannerData)}
       {/* {console.log(bannerData.length)} */}

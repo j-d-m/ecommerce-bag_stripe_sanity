@@ -1,6 +1,6 @@
 import React from "react";
 import { client } from "../../lib/client";
-import { Product, HeroBanner, Footer } from "../../components";
+import { Product, HeroBanner, Footer, FooterBanner } from "../../components";
 {
   /*reciving the props from below*/
 }
@@ -22,7 +22,7 @@ function Home({ products, bannerData }) {
           <Product key={product._id} product={product} />
         ))}
       </div>
-      <Footer footer={bannerData && bannerData[0]} />
+      <FooterBanner footer={bannerData && bannerData[0]} />
     </div>
   );
 }

@@ -9,17 +9,20 @@ function Home({ products, bannerData }) {
     <div>
       {/* bannerData is an array with on object and we will always be passing the first element of that array */}
       <HeroBanner heroBanner={bannerData.length && bannerData[0]} />
-      {console.log(bannerData)}
+      {/* {console.log(bannerData)} */}
       {/* {console.log(bannerData.length)} */}
       <div className="products-heading">
-        <h2>Best Selling Bags</h2>
-        <p>Multiple different bags</p>
+        <h2>Best Selling Accessories</h2>
+        <p>Multiple different Accessories</p>
       </div>
-      {/*looping over the products */}
+      {/*mapping over the products */}
       <div className="products-container">
-        {products?.map((product) => product.name)}
+        {products?.map((product) => (
+          /*passing the product key in the loop as the product key and the product value as the Product component*/
+          <Product key={product._id} product={product} />
+        ))}
       </div>
-      <Footer />
+      <Footer footer={bannerData && bannerData[0]} />
     </div>
   );
 }

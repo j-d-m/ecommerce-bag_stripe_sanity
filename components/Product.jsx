@@ -9,7 +9,7 @@ const Products = ({ product: { image, name, slug, price } }) => {
     <div>
       <Link href={`/product/${slug.current}`}>
         <div className="product-card">
-          {/*passing the destructured product props to the image element*/}
+          {/* receiving then passing the destructured product props to the image element*/}
           <img
             src={urlFor(image && image[0])}
             alt=""

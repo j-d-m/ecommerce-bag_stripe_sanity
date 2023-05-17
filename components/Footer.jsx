@@ -1,7 +1,23 @@
 import React from "react";
-
+import {
+  AiFillInstagram,
+  AiOutlineTwitter,
+  AiOutlineCopyright,
+} from "react-icons/ai";
 function Footer() {
-  return <div className="footer-container">this is the footer component</div>;
+  const copyRight = new Date().getFullYear();
+  return (
+    <div className="footer-container">
+      {" "}
+      {`${copyRight} TrendVault All Rights Reserved.`}
+      <AiOutlineCopyright />
+      <p className="icons">
+        {" "}
+        <AiFillInstagram />
+        <AiOutlineTwitter />
+      </p>
+    </div>
+  );
 }
 
 export default Footer;

@@ -8,7 +8,7 @@ import Footer from "./Footer";
  it will allow us to dynamically update the context of the head for each page of the application.
  */
 
-//  here we are setting the metadata for the layout of site
+//  here we are setting the metadata for the layout of site and receiving the children props and passing them down to the main
 const Layout = ({ children }) => {
   return (
     <div className="layout">

@@ -5,7 +5,7 @@ export default function App({ Component, pageProps }) {
   return (
     <Layout>
       {/* component refers the current component */}
-      <Component {...pageProps} />;
+      <Component {...pageProps} />
     </Layout>
   );
 }

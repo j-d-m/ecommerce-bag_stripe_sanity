@@ -447,6 +447,18 @@ span.text-red {
   gap: 5px;
   align-items: center;
 }
+/** //** todo
+/* todo .star-rating input[type="radio"] { display: none;}
+/* todo.star-rating label {
+/* todo display: inline-block;
+/* todo   width: 30px;
+/* todo   height: 30px;
+/* todo   background-image: url(star-icon.png); /** Replace with your star icon image
+/* todo    background-size: cover;
+/* todo cursor: pointer;}
+/* todo .star-rating input[type="radio"]:checked + label {
+  /** Style for the selected star 
+  /** You can change the background image to represent a filled star }*/
 
 .product-detail-desc h4 {
   margin-top: 10px;

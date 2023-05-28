@@ -13,12 +13,16 @@ import {
   AiOutlineMinus,
 } from "react-icons/ai";
 import { Product } from "../../../components";
+import { useStateContext } from "../../../context/StateContext";
 
 const ProductDetails = ({ product, products }) => {
   // destructing the props of product
   const { image, name, details, price } = product;
 
   const [index, setIndex] = useState(0);
+
+  const { increaseQuantity, decreaseQuantity, itemCount } = useStateContext();
+  console.log(decreaseQuantity);
   return (
     <div>
       <div className="product-detail-container">
@@ -55,7 +59,8 @@ const ProductDetails = ({ product, products }) => {
               <AiOutlineStar />
             </div>
             <p>(20)</p>
-            {/**  //*todo <input type="radio" id="star5" name="rating" value="5" />
+            {/* //** To make the rating dynamic we must implement this    
+             //*todo <input type="radio" id="star5" name="rating" value="5" />
             //*todo <label for="star5"></label>
             //*todo <input type="radio" id="star4" name="rating" value="4" />
             //*todo <label for="star4"></label>
@@ -72,13 +77,11 @@ const ProductDetails = ({ product, products }) => {
           <div className="quantity">
             <h3>Quantity:</h3>
             <p className="quantity-desc">
-              <span className="minus" onClick="">
+              <span className="minus" onClick={decreaseQuantity}>
                 <AiOutlineMinus />{" "}
               </span>
-              <span className="num" onClick="">
-                0
-              </span>
-              <span className="plus" onClick="">
+              <span className="num">{itemCount}</span>
+              <span className="plus" onClick={increaseQuantity}>
                 <AiOutlinePlus />{" "}
               </span>
             </p>
@@ -151,7 +154,7 @@ export const getStaticProps = async ({ params: { slug } }) => {
 
   const product = await client.fetch(query);
   const products = await client.fetch(productsQuery);
-  console.log(product);
+  // console.log(product);
 
   {
     /*remember what ever is returned from getStaticProps

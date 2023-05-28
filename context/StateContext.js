@@ -16,6 +16,20 @@ export const StateContext = ({ children }) => {
   //this will track the quantity of each item the user adds to their cart
   const [itemCount, setItemCount] = useState(1);
 
+  //this function will allow us to add to the cart while checking if there are already items in the cart
+  const onAdd = (product, quantity) => {
+    const checkProductInCart = cartItems.find(
+      (item) => item._id === product._id
+    );
+
+    if (checkProductInCart) {
+      setTotalPrice(
+        (prevTotalPrice) => prevTotalPrice + product.price * quantity
+      );
+      setTotalQuantity((prevTotalQuantities) => prevTotalQuantities + quantity);
+    }
+  };
+
   //increasing the number of items added to the cart by checking the previous amount in the cart
   const increaseQuantity = () => {
     setItemCount((previousItemQuantity) => previousItemQuantity + 1);

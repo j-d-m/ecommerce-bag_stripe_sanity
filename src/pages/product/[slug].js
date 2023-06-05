@@ -21,8 +21,10 @@ const ProductDetails = ({ product, products }) => {
 
   const [index, setIndex] = useState(0);
 
-  const { increaseQuantity, decreaseQuantity, itemCount } = useStateContext();
-  console.log(decreaseQuantity);
+  const { increaseQuantity, decreaseQuantity, itemCount, onAdd } =
+    useStateContext();
+
+  console.log(decreaseQuantity && increaseQuantity);
   return (
     <div>
       <div className="product-detail-container">
@@ -87,7 +89,11 @@ const ProductDetails = ({ product, products }) => {
             </p>
           </div>
           <div className="buttons">
-            <button type="button" className="add-to-cart" onClick="">
+            <button
+              type="button"
+              className="add-to-cart"
+              onClick={() => onAdd(product, itemCount)}
+            >
               Add to Cart
             </button>
             <button type="button" className="buy-now" onClick="">

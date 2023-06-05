@@ -15,7 +15,6 @@ const HeroBanner = ({
 }) => {
   return (
     <div className="hero-banner-container">
-      {/* {console.log(bannerData)} */}
       <div>
         {/* passing dynamic data from the sanity backend*/}
         <p className="beats-solo">{smallText}</p>

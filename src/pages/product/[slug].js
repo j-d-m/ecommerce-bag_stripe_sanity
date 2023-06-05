@@ -24,7 +24,7 @@ const ProductDetails = ({ product, products }) => {
   const { increaseQuantity, decreaseQuantity, itemCount, onAdd } =
     useStateContext();
 
-  console.log(decreaseQuantity && increaseQuantity);
+  // console.log(decreaseQuantity && increaseQuantity);
   return (
     <div>
       <div className="product-detail-container">
@@ -96,7 +96,7 @@ const ProductDetails = ({ product, products }) => {
             >
               Add to Cart
             </button>
-            <button type="button" className="buy-now" onClick="">
+            <button type="button" className="buy-now">
               Buy Now
             </button>
           </div>
@@ -160,7 +160,6 @@ export const getStaticProps = async ({ params: { slug } }) => {
 
   const product = await client.fetch(query);
   const products = await client.fetch(productsQuery);
-  // console.log(product);
 
   {
     /*remember what ever is returned from getStaticProps

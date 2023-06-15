@@ -11,7 +11,8 @@ const Navbar = () => {
       <p className="logo">
         <Link href="/">TrendVault</Link>
       </p>
-      //controlling the opening and closing of the cart with setting the state
+      {/* controlling the opening and closing of the cart with setting the state  on click*/}
+
       <button
         type="button"
         className="cart-icon"
@@ -20,7 +21,7 @@ const Navbar = () => {
         <AiOutlineShoppingCart />
         <span className="cart-item-qty">{totalQuantity}</span>
       </button>
-      // only showing the cart when the state is true
+      {/*  only showing the cart when the state is true */}
       {showCart && <Cart />}
     </div>
   );

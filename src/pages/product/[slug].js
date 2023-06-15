@@ -26,7 +26,7 @@ const ProductDetails = ({ product, products }) => {
 
   // console.log(decreaseQuantity && increaseQuantity);
   return (
-    <div>
+    <>
       <div className="product-detail-container">
         <div>
           <div className="image-container">
@@ -112,7 +112,7 @@ const ProductDetails = ({ product, products }) => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

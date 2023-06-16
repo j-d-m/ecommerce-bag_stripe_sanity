@@ -62,9 +62,21 @@ const Cart = () => {
                   </div>
                   <div className="flex bottom">
                     <div>
-                      //**!continue here */
-                      <p className="quantity-desc">1</p>
+                      <p className="quantity-desc">
+                        <span className="minus" onClick="">
+                          <AiOutlineMinus />{" "}
+                        </span>
+                        {/* //**!this is hardcoded and must be changed to be dynamic */}
+                        <span className="num">0</span>
+                        <span className="plus" onClick="">
+                          <AiOutlinePlus />{" "}
+                        </span>
+                      </p>
                     </div>
+                    {/* //**!continue here */}
+                    <button type="button" className="remove-item">
+                      <TiDeleteOutline />
+                    </button>
                   </div>
                 </div>
               </div>

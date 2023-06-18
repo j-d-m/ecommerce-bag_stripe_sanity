@@ -13,11 +13,14 @@ export const StateContext = ({ children }) => {
   //This will hold the data from the localStorage and we will pass the data to this state.
   const [cartItems, setCartItems] = useState([]);
   //this will track the total price of the purchase
-  const [totalPrice, setTotalPrice] = useState();
+  const [totalPrice, setTotalPrice] = useState(0);
   //this will track the total quantity of the purchase
   const [totalQuantity, setTotalQuantity] = useState(0);
   //this will track the quantity of each item the user adds to their cart
   const [itemCount, setItemCount] = useState(1);
+
+  let foundProduct;
+  let index;
 
   //this function will allow us to add to the cart by checking if there are already items in the cart
   const onAdd = (product, quantity) => {
@@ -49,6 +52,36 @@ export const StateContext = ({ children }) => {
     toast.success(`${itemCount} ${product.name} added to your cart`);
   };
 
+  //differentiating between products in the cart by check and comparing the ids and values of each product added to cart.
+  const toggleCartItemQuantity = (id, value) => {
+    foundProduct = cartItems.find((item) => item._id === id);
+    index = cartItems.findIndex((product) => product._id === id);
+
+    //spreading the properties of the product using the spread operator and adding a new property then increasing the quantity by 1
+    if (value === "increment") {
+      setCartItems([
+        ...cartItems,
+        { ...foundProduct, quantity: foundProduct.quantity + 1 },
+      ]);
+      //resetting the total price to add the previous price of the state and adding it to what ever product price is found according to the toggleCartItemQuantity function.
+      setTotalPrice(
+        (previousTotalPrice) => previousTotalPrice + foundProduct.price
+      );
+      setTotalQuantity((prevTotalQuantities) => prevTotalQuantities + 1);
+    } else if (value === "decrement") {
+      if (foundProduct.quantity > 1) {
+        setCartItems([
+          ...cartItems,
+          { ...foundProduct, quantity: foundProduct.quantity - 1 },
+        ]);
+
+        setTotalPrice(
+          (previousTotalPrice) => previousTotalPrice - foundProduct.price
+        );
+        setTotalQuantity((prevTotalQuantities) => prevTotalQuantities - 1);
+      }
+    }
+  };
   //increasing the number of items added to the cart by checking the previous amount in the cart
   const increaseQuantity = () => {
     setItemCount((previousItemQuantity) => previousItemQuantity + 1);
@@ -75,6 +108,7 @@ export const StateContext = ({ children }) => {
         increaseQuantity,
         decreaseQuantity,
         onAdd,
+        toggleCartItemQuantity,
       }}
     >
       {children}

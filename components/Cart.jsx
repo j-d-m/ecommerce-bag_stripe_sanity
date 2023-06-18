@@ -14,76 +14,107 @@ import { urlFor } from "../lib/client";
 
 const Cart = () => {
   const cartRef = useRef();
-  const { totalPrice, totalQuantity, cartItems, setShowCart } =
-    useStateContext();
-
+  const {
+    totalPrice,
+    totalQuantity,
+    cartItems,
+    setShowCart,
+    toggleCartItemQuantity,
+  } = useStateContext();
+  console.log(toggleCartItemQuantity);
   return (
-    <div className="cart-wrapper" ref={cartRef}>
-      <div className="cart-container">
-        <button
-          type="button"
-          className="cart-heading"
-          onClick={() => setShowCart(false)}
-        >
-          <AiOutlineLeft />
-          <span className="heading">Your Cart</span>
-          <span className="cart-num-items">({totalQuantity} items)</span>
-        </button>
-        {cartItems.length < 1 && (
-          <div className="empty-cart">
-            <AiOutlineShopping size={150} />
-            <h3>Your shopping cart is empty</h3>
-            <Link href="/">
-              <button
-                type="button"
-                className="btn"
-                onClick={() => setShowCart(false)}
-              >
-                {" "}
-                Continue Shopping{" "}
-              </button>
-            </Link>
-          </div>
-        )}
+    <>
+      <div className="cart-wrapper" ref={cartRef}>
+        <div className="cart-container">
+          <button
+            type="button"
+            className="cart-heading"
+            onClick={() => setShowCart(false)}
+          >
+            <AiOutlineLeft />
+            <span className="heading">Your Cart</span>
+            <span className="cart-num-items">({totalQuantity} items)</span>
+          </button>
+          {cartItems.length < 1 && (
+            <div className="empty-cart">
+              <AiOutlineShopping size={150} />
+              <h3>Your shopping cart is empty</h3>
+              <Link href="/">
+                <button
+                  type="button"
+                  className="btn"
+                  onClick={() => setShowCart(false)}
+                >
+                  {" "}
+                  Continue Shopping{" "}
+                </button>
+              </Link>
+            </div>
+          )}
 
-        <div className="product-container">
-          {cartItems.length >= 1 &&
-            cartItems.map((item) => (
-              <div className="product" key={item._id}>
-                <img
-                  src={urlFor(item?.image[0])}
-                  alt=""
-                  className="cart-product-image"
-                />
-                <div className="item-desc">
-                  <div className="flex top">
-                    <h4>{item.name}</h4>
-                    <h5>${item.price}</h5>
-                  </div>
-                  <div className="flex bottom">
-                    <div>
-                      <p className="quantity-desc">
-                        <span className="minus" onClick="">
-                          <AiOutlineMinus />{" "}
-                        </span>
-                        {/* //**!this is hardcoded and must be changed to be dynamic */}
-                        <span className="num">0</span>
-                        <span className="plus" onClick="">
-                          <AiOutlinePlus />{" "}
-                        </span>
-                      </p>
+          <div className="product-container">
+            {cartItems.length >= 1 &&
+              cartItems.map((item) => (
+                <div className="product" key={item._id}>
+                  <img
+                    src={urlFor(item?.image[0])}
+                    alt=""
+                    className="cart-product-image"
+                  />
+                  <div className="item-desc">
+                    <div className="flex top">
+                      <h5>{item.name}</h5>
+                      <h4>${item.price}</h4>
                     </div>
-                    {/* //**!continue here */}
-                    <button type="button" className="remove-item">
-                      <TiDeleteOutline />
-                    </button>
+                    <div className="flex bottom">
+                      <div>
+                        <p className="quantity-desc">
+                          <span
+                            className="minus"
+                            onClick={() =>
+                              toggleCartItemQuantity(item._id, "decrement")
+                            }
+                          >
+                            <AiOutlineMinus />{" "}
+                          </span>
+                          {/* //**!this is hardcoded and must be changed to be dynamic */}
+                          <span className="num">0</span>
+
+                          <span
+                            className="plus"
+                            onClick={() =>
+                              toggleCartItemQuantity(item._id, "increment")
+                            }
+                          >
+                            <AiOutlinePlus />{" "}
+                          </span>
+                        </p>
+                      </div>
+                      <button type="button" className="remove-item" onClick="">
+                        <TiDeleteOutline />
+                      </button>
+                    </div>
                   </div>
                 </div>
+              ))}
+          </div>
+          {cartItems.length >= 1 && (
+            <div className="cart-bottom">
+              <div className="total">
+                <h3>Subtotal:</h3>
+                <h3>${totalPrice}</h3>
               </div>
-            ))}
+              {/* //**!continue here */}
+              <div className="btn-container">
+                <button type="button" className="btn" onclick="">
+                  Pay With Stripe
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

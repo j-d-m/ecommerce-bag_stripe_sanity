@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { urlFor } from "../lib/client";
 const FooterBanner = ({
-  footer: {
+  Footer: {
     discount,
     largeText1,
     largeText2,

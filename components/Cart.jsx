@@ -20,6 +20,7 @@ const Cart = () => {
     cartItems,
     setShowCart,
     toggleCartItemQuantity,
+    onRemove,
   } = useStateContext();
   console.log(toggleCartItemQuantity);
   return (
@@ -77,8 +78,8 @@ const Cart = () => {
                           >
                             <AiOutlineMinus />{" "}
                           </span>
-                          {/* //**!this is hardcoded and must be changed to be dynamic */}
-                          <span className="num">0</span>
+
+                          <span className="num">{item.quantity}</span>
 
                           <span
                             className="plus"
@@ -90,7 +91,11 @@ const Cart = () => {
                           </span>
                         </p>
                       </div>
-                      <button type="button" className="remove-item" onClick="">
+                      <button
+                        type="button"
+                        className="remove-item"
+                        onClick={() => onRemove(item)}
+                      >
                         <TiDeleteOutline />
                       </button>
                     </div>

@@ -22,7 +22,7 @@ export const StateContext = ({ children }) => {
   let foundProduct;
   let index;
 
-  //this function will allow us to add to the cart by checking if there are already items in the cart
+  //this function will allow us to add to the cart by checking if there are already items in the cart by comparing the item and product ids
   const onAdd = (product, quantity) => {
     const checkProductInCart = cartItems.find(
       (item) => item._id === product._id
@@ -51,16 +51,28 @@ export const StateContext = ({ children }) => {
     }
     toast.success(`${itemCount} ${product.name} added to your cart`);
   };
-
+  const onRemove = (product) => {
+    foundProduct = cartItems.find((item) => item._id === product._id);
+    const newCartItems = cartItems.filter((item) => item._id !== product._id);
+    setTotalPrice(
+      (previousTotalPrice) =>
+        previousTotalPrice - foundProduct.price * foundProduct.quantity
+    );
+    setTotalQuantity(
+      (previousTotalQuantity) => previousTotalQuantity - foundProduct.quantity
+    );
+    setCartItems(newCartItems);
+  };
   //differentiating between products in the cart by check and comparing the ids and values of each product added to cart.
   const toggleCartItemQuantity = (id, value) => {
     foundProduct = cartItems.find((item) => item._id === id);
     index = cartItems.findIndex((product) => product._id === id);
+    const newCartItems = cartItems.filter((item) => item._id !== id);
 
-    //spreading the properties of the product using the spread operator and adding a new property then increasing the quantity by 1
+    //spreading the properties of the product and adding a new property then increasing the quantity by 1
     if (value === "increment") {
       setCartItems([
-        ...cartItems,
+        ...newCartItems,
         { ...foundProduct, quantity: foundProduct.quantity + 1 },
       ]);
       //resetting the total price to add the previous price of the state and adding it to what ever product price is found according to the toggleCartItemQuantity function.
@@ -71,7 +83,7 @@ export const StateContext = ({ children }) => {
     } else if (value === "decrement") {
       if (foundProduct.quantity > 1) {
         setCartItems([
-          ...cartItems,
+          ...newCartItems,
           { ...foundProduct, quantity: foundProduct.quantity - 1 },
         ]);
 
@@ -109,6 +121,7 @@ export const StateContext = ({ children }) => {
         decreaseQuantity,
         onAdd,
         toggleCartItemQuantity,
+        onRemove,
       }}
     >
       {children}

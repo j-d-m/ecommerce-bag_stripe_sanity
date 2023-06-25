@@ -4,11 +4,7 @@ import Navbar from "./Navbar";
 
 import Footer from "./Footer";
 
-/** In nextjs the Head is the same as the head tag in html that will give you meta data about the site such as the page title, description.
- it will allow us to dynamically update the context of the head for each page of the application.
- */
-
-//  here we are setting the metadata for the layout of site and receiving the children props and passing them down to the main
+// **  here we are setting the metadata for the layout of site and receiving the children props and passing them down to the main */
 const Layout = ({ children }) => {
   return (
     <div className="layout">

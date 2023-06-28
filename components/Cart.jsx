@@ -109,7 +109,7 @@ const Cart = () => {
                 <h3>Subtotal:</h3>
                 <h3>${totalPrice}</h3>
               </div>
-              {/* //**!continue here */}
+
               <div className="btn-container">
                 <button type="button" className="btn" onclick="">
                   Pay With Stripe

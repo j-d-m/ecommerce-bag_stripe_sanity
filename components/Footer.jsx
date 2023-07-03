@@ -7,16 +7,18 @@ import {
 function Footer() {
   const copyRight = new Date().getFullYear();
   return (
-    <div className="footer-container">
-      {" "}
-      {`${copyRight} TrendVault All Rights Reserved.`}
-      <AiOutlineCopyright />
-      <p className="icons">
+    <>
+      <div className="footer-container">
         {" "}
-        <AiFillInstagram />
-        <AiOutlineTwitter />
-      </p>
-    </div>
+        {`${copyRight} TrendVault All Rights Reserved.`}
+        <AiOutlineCopyright />
+        <p className="icons">
+          {" "}
+          <AiFillInstagram />
+          <AiOutlineTwitter />
+        </p>
+      </div>
+    </>
   );
 }
 

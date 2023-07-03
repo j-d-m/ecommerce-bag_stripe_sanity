@@ -1,22 +1,31 @@
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+// import Stripe from "stripe";
+// const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 //remember in nextjs each file must have its own handler
 export default async function handler(req, res) {
   if (reg.method === "POST") {
+    console.log(req.body.cartItems);
     try {
       //creating a checkout session from the body params and passing it bellow
       const params = {
         submit_type: "pay",
         mode: "payment",
-        payment_method_types: ["card", "paypal"],
+        payment_method_types: ["card"],
+        payment_method_options: ["card"],
         currency: ["USD", "EUR", "GBP", "NZD", "AUD"],
         automatic_tax: {
           enabled: true,
         },
         billing_address_collection: "auto",
-        //**todo */
-        //**continue here 2:45 */
-        shipping_options: [],
+
+        shipping_options: [
+          //NORMAL SHIPPING
+          { shipping_rate: "shr_1NOQG8FIa6arWm7HsNRlpiCM" },
+          //FAST SHIPPING
+          { shipping_rate: "shr_1NPjA1FIa6arWm7HRzU5b27M" },
+        ],
+        //we must find out which item this is referring to
         line_items: [
           {
             //we must provide the price ID

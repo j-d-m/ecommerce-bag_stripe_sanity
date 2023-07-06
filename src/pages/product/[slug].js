@@ -37,7 +37,7 @@ const ProductDetails = ({ product, products }) => {
               //passing a dynamic className to the image
               <img
                 src={urlFor(item)}
-                key={item._id}
+                key={index}
                 alt=""
                 className={
                   index === index ? "small-image selected-image" : "small-image"

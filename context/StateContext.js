@@ -1,6 +1,6 @@
 //**this file will manage the state of the whole application */
 
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useState } from "react";
 import { toast } from "react-hot-toast";
 
 // Creating global context so we are able just pass final function to the children components - NOTE Wrap the _app file in the stateContext tag

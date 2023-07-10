@@ -20,7 +20,7 @@ const Cart = () => {
     totalQuantities,
     cartItems,
     setShowCart,
-    toggleCartItemQuanitity,
+    toggleCartItemQuantity,
     onRemove,
   } = useStateContext();
 
@@ -44,7 +44,7 @@ const Cart = () => {
     if (response.statusCode === 500) return;
 
     const data = await response.json();
-    console.log(data);
+
     toast.loading("Redirecting...");
 
     stripe.redirectToCheckout({ sessionId: data.id });
@@ -98,18 +98,16 @@ const Cart = () => {
                         <span
                           className="minus"
                           onClick={() =>
-                            toggleCartItemQuanitity(item._id, "dec")
+                            toggleCartItemQuantity(item._id, "decrement")
                           }
                         >
                           <AiOutlineMinus />
                         </span>
-                        <span className="num" onClick="">
-                          {item.quantity}
-                        </span>
+                        <span className="num">{item.quantity}</span>
                         <span
                           className="plus"
                           onClick={() =>
-                            toggleCartItemQuanitity(item._id, "inc")
+                            toggleCartItemQuantity(item._id, "increment")
                           }
                         >
                           <AiOutlinePlus />

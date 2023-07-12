@@ -10,8 +10,10 @@ import {
 } from "react-icons/ai";
 import { Product } from "../../../components";
 import { useStateContext } from "../../../context/StateContext";
-
 const ProductDetails = ({ product, products }) => {
+  if (!product) {
+    return <div>Loading...</div>;
+  }
   // destructing the props of product
   const { image, name, details, price } = product;
 
@@ -20,17 +22,19 @@ const ProductDetails = ({ product, products }) => {
   const { increaseQuantity, decreaseQuantity, itemCount, onAdd } =
     useStateContext();
 
-  // console.log(decreaseQuantity && increaseQuantity);
+  console.log(product.image);
   return (
     <>
       <div className="product-detail-container">
         <div>
           <div className="image-container">
-            <img
-              src={urlFor(image && image[index])}
-              alt=""
-              className="product-detail-image"
-            />
+            {image && (
+              <img
+                src={urlFor(image && image[index])}
+                alt=""
+                className="product-detail-image"
+              />
+            )}
           </div>
           <div className="small-images-container">
             {image?.map((item, index) => (
@@ -132,7 +136,7 @@ export const getStaticPaths = async () => {
 // we are destructing the slug params the slug is referring to the files which is dynamic route to what ever specific product is being rendered.
 
 export const getStaticProps = async ({ params: { slug } }) => {
-  const query = `*[_type == "product" && slug.current == '${slug}'][0]`;
+  const query = `*[_type == "product" && slug.current == "${slug}"][0]`;
 
   const productsQuery = '*[_type == "product"]';
 

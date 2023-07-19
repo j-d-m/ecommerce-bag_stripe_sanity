@@ -4,10 +4,10 @@ import { Product, HeroBanner, Footer, FooterBanner } from "../../components";
 
 function Home({ products, bannerData }) {
   return (
-    <div>
+    <>
       {/* bannerData is an array with on object and we will always be passing the first element of that array */}
-      <HeroBanner heroBanner={bannerData.length && bannerData[0]} />
-
+      {bannerData.length && <HeroBanner heroBanner={bannerData[0]} />}
+      {console.log(bannerData)}
       <div className="products-heading">
         <h2>Best Selling Accessories</h2>
         <p>Multiple different Accessories</p>
@@ -19,8 +19,8 @@ function Home({ products, bannerData }) {
           <Product key={product._id} product={product} />
         ))}
       </div>
-      <FooterBanner Footer={bannerData && bannerData[0]} />
-    </div>
+      {bannerData && <FooterBanner Footer={bannerData[0]} />}
+    </>
   );
 }
 

@@ -63,7 +63,7 @@ export const StateContext = ({ children }) => {
     );
     setCartItems(newCartItems);
   };
-  //differentiating between products in the cart by check and comparing the ids and values of each product added to cart.
+  //differentiating between products in the cart by checking and comparing the ids and values of each product added to cart.
   const toggleCartItemQuantity = (id, value) => {
     foundProduct = cartItems.find((item) => item._id === id);
     index = cartItems.findIndex((product) => product._id === id);
@@ -75,6 +75,14 @@ export const StateContext = ({ children }) => {
         ...newCartItems,
         { ...foundProduct, quantity: foundProduct.quantity + 1 },
       ]);
+      //** *todo potential fix of bug in the cart when increasing quantity
+      //*todo  setCartItems((newCartItems) => {
+      //*todo    newCartItems.map((item) => {
+      //*todo      if (item._id === id) {
+      // *todo       return { ...item, quantity: foundProduct.quantity + 1 };
+      // *todo     }
+      //*todo   });
+      //*todo })
       //resetting the total price to add the previous price of the state and adding it to what ever product price is found according to the toggleCartItemQuantity function.
       setTotalPrice(
         (previousTotalPrice) => previousTotalPrice + foundProduct.price
@@ -86,6 +94,14 @@ export const StateContext = ({ children }) => {
           ...newCartItems,
           { ...foundProduct, quantity: foundProduct.quantity - 1 },
         ]);
+        //** *todo potential fix of bug in the cart when decreasing quantity
+        //*todo  setCartItems((newCartItems) => {
+        //*todo    newCartItems.map((item) => {
+        //*todo      if (item._id === id) {
+        //*todo       return { ...item, quantity: foundProduct.quantity - 1 };
+        //*todo     }
+        //*todo   });
+        //*todo })
 
         setTotalPrice(
           (previousTotalPrice) => previousTotalPrice - foundProduct.price

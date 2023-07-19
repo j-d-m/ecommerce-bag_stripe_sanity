@@ -13,6 +13,7 @@ const HeroBanner = ({
     desc,
   },
 }) => {
+  // console.log(product);
   return (
     <>
       <div className="hero-banner-container">
@@ -23,14 +24,18 @@ const HeroBanner = ({
           <h1>{largeText1}</h1>
           <img
             src={urlFor(image)}
-            alt="green over the should sling bag"
+            alt="over ear headphones"
             className="hero-banner-image"
           />
           <div>
             {/* LINK in nextjs is the same as an href in react.js - creating a dynamic navigation link to the product */}
-            <Link href={`/product/${product}`}>
+            <Link
+              href={`
+            product/${product}`}
+            >
               <button type="button">{buttonText}</button>
             </Link>
+
             <div className="desc">
               <h5>Description</h5>
               <p>{desc}</p>

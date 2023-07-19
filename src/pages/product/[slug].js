@@ -11,18 +11,22 @@ import {
 import { Product } from "../../../components";
 import { useStateContext } from "../../../context/StateContext";
 const ProductDetails = ({ product, products }) => {
-  if (!product) {
-    return <div>Loading...</div>;
-  }
   // destructing the props of product
   const { image, name, details, price } = product;
+  if (!product || !product.image) {
+    return <div>Loading...</div>;
+  }
 
   const [index, setIndex] = useState(0);
 
-  const { increaseQuantity, decreaseQuantity, itemCount, onAdd } =
+  const { increaseQuantity, decreaseQuantity, itemCount, onAdd, setShowCart } =
     useStateContext();
 
-  console.log(product.image);
+  const handleBuyNow = () => {
+    onAdd(product, itemCount);
+    setShowCart(true);
+  };
+
   return (
     <>
       <div className="product-detail-container">
@@ -37,16 +41,16 @@ const ProductDetails = ({ product, products }) => {
             )}
           </div>
           <div className="small-images-container">
-            {image?.map((item, index) => (
+            {image?.map((item, i) => (
               //passing a dynamic className to the image
               <img
                 src={urlFor(item)}
-                key={index}
+                key={i}
                 alt=""
                 className={
-                  index === index ? "small-image selected-image" : "small-image"
+                  i === index ? "small-image selected-image" : "small-image"
                 }
-                onMouseEnter={() => setIndex(index)}
+                onMouseEnter={() => setIndex(i)}
               />
             ))}
           </div>
@@ -97,7 +101,13 @@ const ProductDetails = ({ product, products }) => {
             >
               Add to Cart
             </button>
-            <button type="button" className="buy-now">
+            <button
+              type="button"
+              className="buy-now"
+              onClick={() => {
+                handleBuyNow;
+              }}
+            >
               Buy Now
             </button>
           </div>
@@ -116,12 +126,14 @@ const ProductDetails = ({ product, products }) => {
     </>
   );
 };
+// };
 
 export const getStaticPaths = async () => {
-  const query = `*[_type== "product"]
+  const query = `*[_type == "product"]
   {slug{current}}`;
 
   const products = await client.fetch(query);
+
   const paths = products.map((product) => ({
     params: {
       slug: product.slug.current,
@@ -133,6 +145,7 @@ export const getStaticPaths = async () => {
     fallback: "blocking",
   };
 };
+
 // we are destructing the slug params the slug is referring to the files which is dynamic route to what ever specific product is being rendered.
 
 export const getStaticProps = async ({ params: { slug } }) => {

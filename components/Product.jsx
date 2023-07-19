@@ -7,22 +7,22 @@ import { urlFor } from "../lib/client";
 const Products = ({ product: { image, name, slug, price } }) => {
   return (
     <>
-      <div>
-        <Link href={`/product/${slug.current}`}>
-          <div className="product-card">
-            {/* receiving then passing the destructured product props to the image element*/}
+      <Link href={`/product/${slug.current}`}>
+        <div className="product-card">
+          {/* receiving then passing the destructured product props to the image element*/}
+          {image && (
             <img
-              src={urlFor(image && image[0])}
+              src={urlFor(image[0])}
               alt=""
               width={250}
               height={250}
               className="product-image"
             />
-            <p className="product-name">{name}</p>
-            <p className="product-price">€{price}</p>
-          </div>
-        </Link>
-      </div>
+          )}
+          <p className="product-name">{name}</p>
+          <p className="product-price">€{price}</p>
+        </div>
+      </Link>
     </>
   );
 };

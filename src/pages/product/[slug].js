@@ -34,7 +34,7 @@ const ProductDetails = ({ product, products }) => {
           <div className="image-container">
             {image && (
               <img
-                src={urlFor(image && image[index])}
+                src={urlFor(image[index])}
                 alt=""
                 className="product-detail-image"
               />
@@ -58,25 +58,25 @@ const ProductDetails = ({ product, products }) => {
         <div className="product-detail-desc">
           <h1>{name}</h1>
           <div className="reviews">
-            <div>
+            {/* <div>
               <AiFillStar />
               <AiFillStar />
               <AiFillStar />
               <AiFillStar />
               <AiOutlineStar />
             </div>
-            <p>(20)</p>
-            {/* //** To make the rating dynamic we must implement this    
-             //*todo <input type="radio" id="star5" name="rating" value="5" />
-            //*todo <label for="star5"></label>
-            //*todo <input type="radio" id="star4" name="rating" value="4" />
-            //*todo <label for="star4"></label>
-            //*todo <input type="radio" id="star3" name="rating" value="3" />
-            //*todo <label for="star3"></label>
-           //*todo <input type="radio" id="star2" name="rating" value="2" />
-           //*todo <label for="star2"></label>
-           //*todo <input type="radio" id="star1" name="rating" value="1" />
-        //*todo <label for="star1"></label> */}
+            <p>(20)</p> */}
+            //** //*todo continue the rating system */
+            <input type="radio" id="star5" name="rating" value="5" />
+            <label for="star5"></label>
+            <input type="radio" id="star4" name="rating" value="4" />
+            <label for="star4"></label>
+            <input type="radio" id="star3" name="rating" value="3" />
+            <label for="star3"></label>
+            <input type="radio" id="star2" name="rating" value="2" />
+            <label for="star2"></label>
+            <input type="radio" id="star1" name="rating" value="1" />
+            <label for="star1"></label>
           </div>
           <h4>Details</h4>
           <p>{details}</p>

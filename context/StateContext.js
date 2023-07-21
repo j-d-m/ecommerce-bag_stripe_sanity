@@ -20,7 +20,7 @@ export const StateContext = ({ children }) => {
   const [itemCount, setItemCount] = useState(1);
 
   let foundProduct;
-  let index;
+  // let index;
 
   //this function will allow us to add to the cart by checking if there are already items in the cart by comparing the item and product ids
   const onAdd = (product, quantity) => {
@@ -66,50 +66,63 @@ export const StateContext = ({ children }) => {
   //differentiating between products in the cart by checking and comparing the ids and values of each product added to cart.
   const toggleCartItemQuantity = (id, value) => {
     foundProduct = cartItems.find((item) => item._id === id);
-    index = cartItems.findIndex((product) => product._id === id);
-    const newCartItems = cartItems.filter((item) => item._id !== id);
-
     //spreading the properties of the product and adding a new property then increasing the quantity by 1
     if (value === "increment") {
-      setCartItems([
-        ...newCartItems,
-        { ...foundProduct, quantity: foundProduct.quantity + 1 },
-      ]);
-      //** *todo potential fix of bug in the cart when increasing quantity
-      //*todo  setCartItems((newCartItems) => {
-      //*todo    newCartItems.map((item) => {
-      //*todo      if (item._id === id) {
-      // *todo       return { ...item, quantity: foundProduct.quantity + 1 };
-      // *todo     }
-      //*todo   });
-      //*todo })
-      //resetting the total price to add the previous price of the state and adding it to what ever product price is found according to the toggleCartItemQuantity function.
-      setTotalPrice(
-        (previousTotalPrice) => previousTotalPrice + foundProduct.price
+      setCartItems((prevCartItems) =>
+        prevCartItems.map((item) =>
+          item._id === id ? { ...item, quantity: item.quantity + 1 } : item
+        )
       );
+      //resetting the total price to add the previous price of the state and adding it to what ever product price is found according to the toggleCartItemQuantity function.
+      setTotalPrice((prevTotalPrice) => prevTotalPrice + foundProduct.price);
       setTotalQuantity((prevTotalQuantities) => prevTotalQuantities + 1);
     } else if (value === "decrement") {
       if (foundProduct.quantity > 1) {
-        setCartItems([
-          ...newCartItems,
-          { ...foundProduct, quantity: foundProduct.quantity - 1 },
-        ]);
-        //** *todo potential fix of bug in the cart when decreasing quantity
-        //*todo  setCartItems((newCartItems) => {
-        //*todo    newCartItems.map((item) => {
-        //*todo      if (item._id === id) {
-        //*todo       return { ...item, quantity: foundProduct.quantity - 1 };
-        //*todo     }
-        //*todo   });
-        //*todo })
-
-        setTotalPrice(
-          (previousTotalPrice) => previousTotalPrice - foundProduct.price
+        setCartItems((prevCartItems) =>
+          prevCartItems.map((item) =>
+            item._id === id ? { ...item, quantity: item.quantity - 1 } : item
+          )
         );
+
+        setTotalPrice((prevTotalPrice) => prevTotalPrice - foundProduct.price);
         setTotalQuantity((prevTotalQuantities) => prevTotalQuantities - 1);
       }
     }
   };
+
+  //**alternative solution STARTS */
+  // const toggleCartItemQuantity = (id, value) => {
+  //   foundProduct = cartItems.find((item) => item._id === id);
+  //   index = cartItems.findIndex((product) => product._id === id);
+  //   const newCartItems = cartItems.filter((item) => item._id !== id);
+
+  //
+  //   if (value === "increment") {
+  //     setCartItems([
+  //       ...newCartItems,
+  //       { ...foundProduct, quantity: foundProduct.quantity + 1 },
+  //     ]);
+
+  //
+  //     setTotalPrice(
+  //       (previousTotalPrice) => previousTotalPrice + foundProduct.price
+  //     );
+  //     setTotalQuantity((prevTotalQuantities) => prevTotalQuantities + 1);
+  //   } else if (value === "decrement") {
+  //     if (foundProduct.quantity > 1) {
+  //       setCartItems([
+  //         ...newCartItems,
+  //         { ...foundProduct, quantity: foundProduct.quantity - 1 },
+  //       ]);
+
+  //       setTotalPrice(
+  //         (previousTotalPrice) => previousTotalPrice - foundProduct.price
+  //       );
+  //       setTotalQuantity((prevTotalQuantities) => prevTotalQuantities - 1);
+  //     }
+  //   }
+  // };
+  //**alternative solution ENDS */
   //increasing the number of items added to the cart by checking the previous amount in the cart
   const increaseQuantity = () => {
     setItemCount((previousItemQuantity) => previousItemQuantity + 1);

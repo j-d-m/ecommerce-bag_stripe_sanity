@@ -447,19 +447,21 @@ span.text-red {
   gap: 5px;
   align-items: center;
 }
-/** //** todo
-/* todo .star-rating input[type="radio"] { display: none;}
-/* todo.star-rating label {
-/* todo display: inline-block;
-/* todo   width: 30px;
-/* todo   height: 30px;
-/* todo   background-image: url(star-icon.png); /** Replace with your star icon image
-/* todo    background-size: cover;
-/* todo cursor: pointer;}
-/* todo .star-rating input[type="radio"]:checked + label {
-  /** Style for the selected star 
-  /** You can change the background image to represent a filled star }*/
-
+/** //** todo */
+.reviews .star-rating button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 1.4em;
+}
+.on {
+  color: #ffdf00;
+}
+.off {
+  border: 1px solid #000;
+  /* color: #000; */
+}
 .product-detail-desc h4 {
   margin-top: 10px;
 }

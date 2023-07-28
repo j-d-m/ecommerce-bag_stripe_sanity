@@ -2,13 +2,8 @@
 
 import React, { useState } from "react";
 import { client, urlFor } from "../../../lib/client";
-import {
-  AiFillStar,
-  AiOutlineStar,
-  AiOutlinePlus,
-  AiOutlineMinus,
-} from "react-icons/ai";
-import { Product } from "../../../components";
+import { AiOutlinePlus, AiOutlineMinus, AiOutlineStar } from "react-icons/ai";
+import { Product, StarRating } from "../../../components";
 import { useStateContext } from "../../../context/StateContext";
 const ProductDetails = ({ product, products }) => {
   // destructing the props of product
@@ -57,6 +52,7 @@ const ProductDetails = ({ product, products }) => {
         </div>
         <div className="product-detail-desc">
           <h1>{name}</h1>
+          <p>Add your rating</p>
           <div className="reviews">
             {/* <div>
               <AiFillStar />
@@ -64,19 +60,10 @@ const ProductDetails = ({ product, products }) => {
               <AiFillStar />
               <AiFillStar />
               <AiOutlineStar />
-            </div>
-            <p>(20)</p> */}
-            //** //*todo continue the rating system */
-            <input type="radio" id="star5" name="rating" value="5" />
-            <label for="star5"></label>
-            <input type="radio" id="star4" name="rating" value="4" />
-            <label for="star4"></label>
-            <input type="radio" id="star3" name="rating" value="3" />
-            <label for="star3"></label>
-            <input type="radio" id="star2" name="rating" value="2" />
-            <label for="star2"></label>
-            <input type="radio" id="star1" name="rating" value="1" />
-            <label for="star1"></label>
+            </div>*/}
+
+            <StarRating />
+            <p>(20)</p>
           </div>
           <h4>Details</h4>
           <p>{details}</p>
